@@ -1,0 +1,63 @@
+class Flower:
+    def __init__(self, name, quantity):
+        self.name = name
+        self.quantity = quantity
+
+    def update_quantity(self, amount):
+        self.quantity += amount
+
+
+class Bouquet:
+    def __init__(self):
+        self.flowers = []
+
+    def add_flower(self, flower):
+        self.flowers.append(flower)
+
+
+class FlowerShop:
+    def __init__(self):
+        self.flowers = []
+
+    def add_flower(self, flower):
+        self.flowers.append(flower)
+
+    def create_bouquet(self, flower_names):
+        bouquet = Bouquet()
+        for flower_name in flower_names:
+            flower = self.find_flower(flower_name)
+            if flower:
+                bouquet.add_flower(flower)
+            else:
+                print(f"{flower_name} is not available.")
+        return bouquet
+
+    def find_flower(self, flower_name):
+        for flower in self.flowers:
+            if flower.name == flower_name:
+                return flower
+        return None
+
+    def check_inventory(self):
+        for flower in self.flowers:
+            print(f"{flower.name}: {flower.quantity} available")
+
+# Create a flower shop
+my_flower_shop = FlowerShop()
+
+# Add flowers to the flower shop
+rose = Flower("Rose", 10)
+lily = Flower("Lily", 5)
+sunflower = Flower("Sunflower", 3)
+
+my_flower_shop.add_flower(rose)
+my_flower_shop.add_flower(lily)
+my_flower_shop.add_flower(sunflower)
+
+# Create a bouquet
+bouquet = my_flower_shop.create_bouquet(["Rose", "Lily", "Sunflower"])
+if bouquet:
+    print("Bouquet created successfully!")
+
+# Check inventory
+my_flower_shop.check_inventory()
